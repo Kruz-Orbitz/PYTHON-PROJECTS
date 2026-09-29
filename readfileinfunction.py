@@ -20,3 +20,13 @@ def update_student(students, name, new_score):
 students = load_students()
 
 update_student(students, "Miracle", 95)
+
+all_students = []
+
+for student in students:
+    line = student[0] + ',' + str(student[1])
+    all_students.append(line)
+student_update = '\n'.join(all_students)
+
+with open('students.txt', 'w') as file:
+    file.write(student_update)
