@@ -1,21 +1,11 @@
-file = open("scores.txt", "w")
+def save_students(students):
+    with open('students.txt', 'w') as file:
+        for student in students:
+            file.write(student + '\n')
+            print(student)
 
-file.write("45\n")
-file.write("75\n")
-file.write("81\n")
-file.write("63\n")
-file.write("90\n")
 
-file.close()
 
-new_file = open("scores.txt", "r")
 
-score_numbers = new_file.readlines()
-
-total = 0
-
-for score in score_numbers:
-    numbers = int(score)
-    total = total + numbers
-print(total)
-file.close()
+students = ['kingsley', 'tega', 'miracle', 'neche', 'agu']
+save_students(students)
