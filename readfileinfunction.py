@@ -24,7 +24,7 @@ update_student(students, "Miracle", 95)
 all_students = []
 
 for student in students:
-    line = student[0] + ',' + str(student[1])
+    line = f'{student[0]}, {student[1]}'
     all_students.append(line)
 student_update = '\n'.join(all_students)
 
