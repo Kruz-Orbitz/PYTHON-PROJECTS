@@ -1,0 +1,22 @@
+[
+    {
+        "description": "television",
+        "amount": 200
+    },
+    {
+        "description": "phone",
+        "amount": 500
+    },
+    {
+        "description": "laptop",
+        "amount": 300
+    },
+    {
+        "description": "data",
+        "amount": 1500
+    },
+    {
+        "descrition": "mouse",
+        "amount": 250
+    }
+]

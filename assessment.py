@@ -1,29 +1,21 @@
-import csv
+from expenses_function import expenses, display_expenses, calculate_total
 
-def load_students():
-        
-    student_records = []
-    try:
-        with open('students.csv', 'r', newline = '') as file:
-            reader = csv.DictReader(file)
-            if reader.fieldnames is None:
-                print('the file is empty')
-                return student_records
-            if 'name' not in reader.fieldnames or 'score' not in reader.fieldnames:
-                print('invalid headers')
-                return student_records
-            
-            for student in reader:
-                if student['score'] == '' or student['name'] == '':
-                    continue
-                try:
-                    student['score'] = int(student['score'])
-                    if student['score'] < 0 or student['score'] > 100:
-                        continue
-                except ValueError:
-                    continue
-                student_records.append(student)
-            return student_records
-    except FileNotFoundError:
-        print('file was not found')
-        return student_records
+
+while True:
+    print("1. view expenses")
+    print("2. view total")
+    print("3.exit")
+
+    make_your_choice = input("choose an option 1-3: ").strip()
+
+    if make_your_choice == "1":
+        display_expenses(expenses)
+
+    elif make_your_choice == "2":
+        total = calculate_total(expenses)
+        print(f'total expenses: {total}')
+
+    elif make_your_choice == "3":
+        break
+    else:
+        print("input a valid number 1-3")
