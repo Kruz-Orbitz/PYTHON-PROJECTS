@@ -1,21 +1,23 @@
-from expenses_function import expenses, display_expenses, calculate_total
-
+min_vent_amount = 1000
+unit_amount = 300
 
 while True:
-    print("1. view expenses")
-    print("2. view total")
-    print("3.exit")
+    try:
+        recharge_amount = int(input('Please enter your vent amount: '))
+        if recharge_amount >= min_vent_amount:
+            total_token = recharge_amount / unit_amount
+            print(f'your vent unit(s) is: {total_token:.2f}')
+            break
+        else: 
+            print('input from 1000 and above')
+    except ValueError:
+        print('input a valid amount')
 
-    make_your_choice = input("choose an option 1-3: ").strip()
+    
 
-    if make_your_choice == "1":
-        display_expenses(expenses)
 
-    elif make_your_choice == "2":
-        total = calculate_total(expenses)
-        print(f'total expenses: {total}')
 
-    elif make_your_choice == "3":
-        break
-    else:
-        print("input a valid number 1-3")
+
+
+
+

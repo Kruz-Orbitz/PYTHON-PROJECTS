@@ -40,11 +40,11 @@ while True:
         description = input("input description").strip()
         try:
             amount = float(input("input amount"))
+            new_expenses = {"description": description, "amount": amount}
+            expenses.append(new_expenses)
         except ValueError:
             print("input a valid number")
-        new_expenses = {"description": description, "amount": amount}
-        expenses.append(new_expenses)
-
+            continue
         with open("expenses.json", "w") as file:
             json.dump(expenses, file, indent=4)
     elif choice == "4":
