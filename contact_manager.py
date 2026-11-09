@@ -3,12 +3,20 @@ phones = set()
 
 
 def add_contact(name, number):
-    if number in phones:
+    if number == "":
+        print("enter a phone number")
+        return
+    elif name == "":
+        print("enter a name")
+        return
+    elif number in phones:
         print("number already exist")
         return
     phones.add(number)
 
     contacts.append({"name": name, "number": number})
+    print("contact save successfully")
+    save_contacts()
 
 
 def display_contacts():
@@ -25,11 +33,15 @@ def delete_contact(number):
             contacts.remove(contact)
             phones.remove(number)
             print("details removed successfully")
+            save_contacts()
             return
     print("contact does not exist")
 
 
 def edit_contact(number):
+    if number == "":
+        print("input a phone number")
+        return
     for contact in contacts:
         if contact["number"] == number:
             print(contact["name"])
@@ -42,10 +54,16 @@ def edit_contact(number):
 
             if user_choice == "1":
                 new_name = input("please enter the new name: ")
+                if new_name == "":
+                    print("enter a name")
+                    return
                 contact["name"] = new_name
 
             elif user_choice == "2":
                 new_phone = input("please enter the new phone number: ")
+                if new_phone == "":
+                    print("please enter a phone number")
+                    return
                 if new_phone in phones and new_phone != number:
                     print("phone number already exist")
                     return
@@ -57,6 +75,10 @@ def edit_contact(number):
             elif user_choice == "3":
                 new_name = input("please enter new name: ")
                 new_phone = input("please enter new phone: ")
+
+                if new_name == "" or new_phone == "":
+                    print("name and phone cannot be empty")
+                    return
                 if new_phone in phones and new_phone != number:
                     print("phone number already exist")
                     return
@@ -71,6 +93,35 @@ def edit_contact(number):
                 return
 
             print("contact saved successfully")
+            save_contacts()
             return
 
     print("contact with that phone number does not exist")
+
+
+def search_contact(name):
+    for contact in contacts:
+        if contact["name"] == name:
+            print(f"{contact['name']}, {contact['number']}")
+            return
+
+    print("\ncontact not found")
+
+
+import json
+
+
+def save_contacts():
+    with open("contacts.json", "w") as file:
+        json.dump(contacts, file, indent=4)
+
+
+def load_contacts():
+    try:
+        with open("contacts.json", "r") as file:
+            reload_contacts = json.load(file)
+            for contact in reload_contacts:
+                contacts.append(contact)
+                phones.add(contact["number"])
+    except FileNotFoundError:
+        print("no saved contacts found")

@@ -1,5 +1,12 @@
-from contact_manager import add_contact, display_contacts, delete_contact, edit_contact
-
+from contact_manager import (
+    add_contact,
+    display_contacts,
+    delete_contact,
+    edit_contact,
+    search_contact,
+    load_contacts
+)
+load_contacts()
 while True:
     print("\n=== MAIN MENU===")
 
@@ -7,12 +14,14 @@ while True:
         "Add contact",
         "Display contacts",
         "Delete contact",
-        "Edit contact" "Exit",
+        "Edit contact",
+        "Search contact",
+        "Exit",
     )
     for option in range(len(main_options)):
         print(option + 1, main_options[option])
 
-    user_choice = input("Please enter your prefered choice 1-4: ")
+    user_choice = input("Please enter your prefered choice 1-6: ")
     if user_choice == "1":
         name = input("please enter a name: ")
         number = input("please enter the phone number: ")
@@ -23,8 +32,13 @@ while True:
     elif user_choice == "3":
         number = input("Please enter the number to be deleted: ")
         delete_contact(number)
-
     elif user_choice == "4":
+        number = input("please enter your existing number: ")
+        edit_contact(number)
+    elif user_choice == "5":
+        name = input("please enter the name: ")
+        search_contact(name)
+    elif user_choice == "6":
         print("alright this is the end")
         break
     else:
