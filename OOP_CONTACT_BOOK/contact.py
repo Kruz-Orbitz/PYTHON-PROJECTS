@@ -3,5 +3,6 @@ class Contact:
         self.name = name
         self.phone_number = phone_number
         self.email = email
+
     def display_contact(self):
         print(self.name, self.phone_number, self.email)

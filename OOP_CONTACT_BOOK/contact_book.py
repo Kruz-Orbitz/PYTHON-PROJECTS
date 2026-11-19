@@ -33,16 +33,49 @@ class ContactBook:
                 print("2. Change phone number")
                 print("3. change email")
 
-                user_selection = input("please choose from 1-3")
+                user_selection = input("please choose from 1-3: ")
                 if user_selection == "1":
-                    new_name = input("enter new name")
-                    if new_name != contact.name:
+                    new_name = input("enter new name: ").strip()
+                    if new_name == "":
+                        print("please enter a valid name")
+                        return
+                    elif new_name != contact.name:
                         contact.name = new_name
                         print("name changed successfully")
+                    else:
+                        print("name already the current name")
                 elif user_selection == "2":
-                    new_number = input
+                    new_number = input("please enter a new phone number: ").strip()
+                    if new_number == "":
+                        print("please enter a valid phone number")
+                        return
+                    elif new_number == contact.phone_number:
+                        print("phone  number already the current number")
+                        return
+                    for duplicate in self.contacts:
+                        if (
+                            duplicate.phone_number == new_number
+                            and duplicate is not contact
+                        ):
+                            print("number already exist")
+                            return
+                    contact.phone_number = new_number
+                    print("number updated successfully")
                 elif user_selection == "3":
-                    print("changing email")
+                    new_email = input("enter a new email address: ").strip()
+                    if new_email == "":
+                        print("please enter a valid email address")
+                        return
+                    elif new_email == contact.email:
+                        print("email already the current email")
+                        return
+                    for duplicate in self.contacts:
+                        if duplicate.email == new_email and duplicate is not contact:
+                            print("email already exist")
+                            return
+                    contact.email = new_email
+                    print("email address successfully changed")
+
                 else:
                     print("invalid selection")
 
