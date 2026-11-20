@@ -1,9 +1,14 @@
+import json
+from contact import Contact
+
+
 class ContactBook:
     def __init__(self):
         self.contacts = []
 
     def add_contact(self, contact):
         self.contacts.append(contact)
+        self.save_contacts()
 
     def display_all_contacts(self):
         for contact in self.contacts:
@@ -21,6 +26,7 @@ class ContactBook:
             if contact.name == name:
                 self.contacts.remove(contact)
                 print(f"{contact.name} deleted sucessfully")
+                self.save_contacts()
                 return
         print("contact not found")
 
@@ -41,6 +47,7 @@ class ContactBook:
                         return
                     elif new_name != contact.name:
                         contact.name = new_name
+                        self.save_contacts()
                         print("name changed successfully")
                     else:
                         print("name already the current name")
@@ -60,6 +67,7 @@ class ContactBook:
                             print("number already exist")
                             return
                     contact.phone_number = new_number
+                    self.save_contacts()
                     print("number updated successfully")
                 elif user_selection == "3":
                     new_email = input("enter a new email address: ").strip()
@@ -74,10 +82,35 @@ class ContactBook:
                             print("email already exist")
                             return
                     contact.email = new_email
+                    self.save_contacts()
                     print("email address successfully changed")
+                    
 
                 else:
                     print("invalid selection")
+                    
 
                 return
+                
         print("Contact not found")
+
+    def save_contacts(self):
+        dict_data = []
+        for contact in self.contacts:
+            dict_data.append(contact.to_dict())
+
+        with open("contacts.json", "w") as file:
+            json.dump(dict_data, file, indent=4)
+
+    def load_contacts(self):
+        try:
+            with open("contacts.json", "r") as file:
+                dict_files = json.load(file)
+        except FileNotFoundError:
+            print('no saved contacts yet')
+            self.contacts = []
+            return
+
+        for contact in dict_files:
+            contact_data = Contact(contact["name"], contact["phone_number"], contact["email"])
+            self.contacts.append(contact_data)

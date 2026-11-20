@@ -6,3 +6,10 @@ class Contact:
 
     def display_contact(self):
         print(self.name, self.phone_number, self.email)
+
+    def to_dict(self):
+        return {
+            "name": self.name,
+            "phone_number": self.phone_number,
+            "email": self.email,
+        }
